@@ -5,6 +5,7 @@ export class UserLastName {
 
     constructor(value: string) {
         this.value = value
+        this.isValidLastName()
     }
 
     private isValidLastName() {

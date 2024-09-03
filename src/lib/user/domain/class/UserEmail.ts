@@ -3,6 +3,7 @@ export class UserEmail {
 
     constructor(value: string) {
         this.value = value
+        this.isValidEmail()
     }
 
     private isValidEmail() {}

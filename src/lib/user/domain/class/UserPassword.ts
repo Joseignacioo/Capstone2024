@@ -3,6 +3,7 @@ export class UserPassword {
 
     constructor(value: string) {
         this.value = value
+        this.isValidPassword()
     }
 
     private isValidPassword() {}

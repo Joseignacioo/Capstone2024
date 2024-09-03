@@ -5,6 +5,7 @@ export class UserId {
 
     constructor(value: string) {
         this.value = value;
+        this.isValidId()
     }
     private isValidId() {
         if(this.value.length == 36) {

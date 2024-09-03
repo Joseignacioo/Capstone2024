@@ -5,6 +5,7 @@ export class UserFirstName {
     
     constructor(value: string) {
         this.value = value;
+        this.isValidFirstName()
     }
     private isValidFirstName() {
         if(this.value == null) {
