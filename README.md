@@ -1,14 +1,28 @@
-# Capstone2024
 
-Integrantes:
-José Romero
-Isabella Martinez
-Juan Leiton
+# Nexuz DB
 
-Docente: Rocio Contreras
+## Authors
 
-Estructura de entregas:
-![Captura de Pantalla 2024-08-19 a la(s) 11 12 14](https://github.com/user-attachments/assets/34064837-80f9-425f-85d0-dc373cb4d9e7)
-![Captura de Pantalla 2024-08-19 a la(s) 11 12 37](https://github.com/user-attachments/assets/c2e7e9c7-561d-42e5-a49e-22c487b6c264)
-![Captura de Pantalla 2024-08-19 a la(s) 11 13 02](https://github.com/user-attachments/assets/0c42c39d-38c3-4443-85d5-f5e15f017d56)
+- https://github.com/Joseignacioo
+- https://github.com/isabella145Martinez
+- https://github.com/ItsJuanKamilo
+
+## Descripción de proyecto APT.
+
+Nombre del proyecto: 
+
+Sistema Automatizado de Gestión de Inventarios con Balanzas Inteligentes.
+
+Objetivo: 
+
+Lograr la automatización el proceso de inventario en bodegas mediante el uso de balanzas con sensores y una aplicación móvil, optimizando la necesidad de registro manuales diarios y mejorando la precisión y eficiencia en la gestión de stock. 
+
+Componentes del sistema: 
+* Balanza del sistema. 
+* Aplicación móvil. 
+* Sistema Arduino. 
+
+Buscamos la mejora de los procesos manuales en las bodegas promoviendo una solución innovadora para la gestión de inventarios. 
+
+
 
