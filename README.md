@@ -1,6 +1,16 @@
 
 # Nexuz DB
 
+django: 
+- pip install -r requirements.txt
+- python manage.py makemigration
+- python manage.py migrate
+- python manage.py runserver
+
+react: 
+- npm i
+- npm start
+
 ## Authors
 
 - https://github.com/Joseignacioo
