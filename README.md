@@ -1,9 +1,6 @@
 
 # Nexuz DB
 
-- npm i
-- npm runserver
-
 ## Authors
 
 - https://github.com/Joseignacioo
