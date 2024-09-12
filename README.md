@@ -23,6 +23,3 @@ Componentes del sistema:
 * Sistema Arduino. 
 
 Buscamos la mejora de los procesos manuales en las bodegas promoviendo una solución innovadora para la gestión de inventarios. 
-
-
-
