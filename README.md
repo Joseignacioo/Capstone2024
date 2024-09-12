@@ -1,8 +1,8 @@
 
 # Nexuz DB
 
-npm i
-npm runserver
+- npm i
+- npm runserver
 
 ## Authors
 
