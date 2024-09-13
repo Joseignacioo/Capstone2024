@@ -1,14 +1,26 @@
 import 'dotenv/config';
 import express from 'express';
 import userRouter from './routes/userRoutes.js';
+import productoRouter from './routes/productoRoutes.js'
 import { db } from './database/connection.js';
+import cors from  'cors'
+
+
+const corsOptions = {
+  origin: "http://localhost:8081",
+  methods: ["POST", "GET"],
+  credentials: true
+}
 
 const app = express();
 
 // Usa las funciones de middleware correctamente
+app.use(cors(corsOptions))
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/api/v1/users', userRouter);
+app.use('/api/v1/', productoRouter)
+
 
 // Función para iniciar el servidor
 const startServer = async () => {
