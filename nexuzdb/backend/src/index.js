@@ -2,6 +2,7 @@ import 'dotenv/config';
 import express from 'express';
 import userRouter from './routes/userRoutes.js';
 import productoRouter from './routes/productoRoutes.js'
+import balanzaRouter from './routes/balanzaRoutes.js'
 import { db } from './database/connection.js';
 import cors from  'cors'
 
@@ -18,8 +19,9 @@ const app = express();
 app.use(cors(corsOptions))
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use('/api/v1/users', userRouter);
-app.use('/api/v1/', productoRouter)
+app.use('/api/user', userRouter);
+app.use('/api/producto', productoRouter)
+app.use('/api/balanza', balanzaRouter)
 
 
 // Función para iniciar el servidor

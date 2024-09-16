@@ -1,4 +1,4 @@
-import { db } from "../src/database/connection.js";
+import { db } from "../database/connection.js";
 
 const create = async({producto_id, nombre_producto, codigo_barras, descripcion, peso_unitario, categoria}) => {
     const query = {

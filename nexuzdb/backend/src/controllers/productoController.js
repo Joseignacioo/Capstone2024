@@ -25,7 +25,7 @@ const getAllProductos = async(req, res)=>{
     try {
         const productos = await ProductoModel.getAllProductos()
 
-        return res.status(201).send(productos)
+        return res.status(200).send(productos)
     } catch (error) {
         console.log(error)
         return res.status(500).json({
