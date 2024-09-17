@@ -1,11 +1,13 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image, TouchableHighlight, FlatList } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity, FlatList } from 'react-native';
 import { useEffect, useState } from 'react';
 
 const icon = require('./assets/LOGO-NEXUZDB.jpeg');
 
 export default function App() {
-  const [todos, setTodos] = useState([]);
+  const [productos, setProductos] = useState([]);
+  const [balanzas, setBalanzas] = useState([]);
+  const [inventarios, setInventarios] = useState([]);
 
   useEffect(() => {
     fetchData();
@@ -13,14 +15,25 @@ export default function App() {
 
   async function fetchData() {
     try {
-      const response = await fetch("http://192.168.100.5:3000/api/v1/productos");
-      if (!response.ok) {
+      const [productosRes, balanzasRes, inventariosRes] = await Promise.all([
+        fetch("http://192.168.100.5:3000/api/producto/productos"),
+        fetch("http://192.168.100.5:3000/api/balanza/balanzas"),
+        fetch("http://192.168.100.5:3000/api/inventario/inventarios"),
+      ]);
+
+      if (!productosRes.ok || !balanzasRes.ok || !inventariosRes.ok) {
         throw new Error('Error en la solicitud');
       }
-      const data = await response.json();
-      setTodos(data);
+
+      const productosData = await productosRes.json();
+      const balanzasData = await balanzasRes.json();
+      const inventariosData = await inventariosRes.json();
+
+      setProductos(productosData);
+      setBalanzas(balanzasData);
+      setInventarios(inventariosData);
     } catch (error) {
-      console.error("Error al obtener los productos:", error);
+      console.error("Error al obtener los datos:", error);
     }
   }
 
@@ -32,6 +45,21 @@ export default function App() {
       <Text style={styles.productoNombre}>Peso: {item.peso_unitario} gr</Text>
     </View>
   );
+  const renderBalanza = ({ item }) => (
+    <View style={styles.card}>
+      <Text style={styles.productoNombre}>Nombre: {item.nombre_balanza}</Text>
+      <Text style={styles.productoNombre}>id: {item.id_unico}</Text>
+      <Text style={styles.productoNombre}>capacidad_max: {item.capacidad_maxima} gr</Text>
+    </View>
+  );
+  const renderInventario = ({ item }) => (
+    <View style={styles.card}>
+      <Text style={styles.productoNombre}>id: {item.inventario_id}</Text>
+      <Text style={styles.productoNombre}>balanza: {item.balanza_id}</Text>
+      <Text style={styles.productoNombre}>cantidad: {item.cantidad} gr</Text>
+      <Text style={styles.productoNombre}>fecha_registro: {item.fecha_registro}</Text>
+    </View>
+  );
 
   return (
     <View style={styles.container}>
@@ -40,20 +68,30 @@ export default function App() {
       
       <Text style={styles.subtitle}>Data Visualization</Text>
       
-      <TouchableHighlight
+      <TouchableOpacity
         onPress={() => alert('hola')}
         style={styles.button}
-        underlayColor="#555"
       >
         <Text style={styles.buttonText}>Ingresar</Text>
-      </TouchableHighlight>
+      </TouchableOpacity>
 
-      {/* Lista de productos */}
       <FlatList
-        data={todos}
+        data={productos}
         renderItem={renderProducto}
-        keyExtractor={(item) => item.usuario_id} // Usar un id único como clave
-        ListEmptyComponent={<Text>No hay productos disponibles</Text>} // Mensaje si no hay productos
+        keyExtractor={(item) => item.producto_id.toString()}
+        ListEmptyComponent={<Text>No hay productos disponibles</Text>}
+      />
+      <FlatList
+        data={balanzas}
+        renderItem={renderBalanza}
+        keyExtractor={(item) => item.balanza_id.toString()} 
+        ListEmptyComponent={<Text>No hay productos disponibles</Text>}
+      />
+      <FlatList
+        data={inventarios}
+        renderItem={renderInventario}
+        keyExtractor={(item) => item.inventario_id.toString()}
+        ListEmptyComponent={<Text>No hay productos disponibles</Text>} 
       />
       
       <StatusBar style="auto" />
@@ -66,7 +104,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
     paddingTop: 50,
   },
   title: {
@@ -103,6 +140,11 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
     borderRadius: 10,
     width: '90%',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
+    elevation: 5, // para Android
   },
   productoNombre: {
     fontSize: 18,
