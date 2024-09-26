@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { FlatList, Text, View } from 'react-native';
-import InventarioItem from '../components/inventarioItem';
+import InventarioItem from '../components/InventarioItem';
 import { styles } from '../styles';
 
 export default function InventariosScreen() {
@@ -12,7 +12,7 @@ export default function InventariosScreen() {
 
   async function fetchInventarios() {
     try {
-      const res = await fetch('http://192.168.100.5:3000/api/inventario/inventarios');
+      const res = await fetch('http://192.168.137.155:3000/api/inventario/inventarios');
       const data = await res.json();
       setInventarios(data);
     } catch (error) {

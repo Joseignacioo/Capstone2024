@@ -49,4 +49,19 @@ export const styles = StyleSheet.create({
     shadowRadius: 2,
     elevation: 5, // sombra para Android
   },
+  form: {
+    gap: 10,
+    width: '60%',
+  },
+  input: {
+    height: 44,
+    borderWidth: 1,
+    borderRadius: 4,
+    padding: 10,
+    backgroundColor: '#fff'
+  },
+  container: {
+    alignItems: 'center',
+    width: '100%',
+  },
 });

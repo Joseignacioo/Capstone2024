@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { FlatList, Text, View } from 'react-native';
-import ProductoItem from '../components/productoItem';
+import ProductoItem from '../components/ProductoItem';
 import { styles } from '../styles';
 
 export default function ProductosScreen() {
@@ -12,7 +12,7 @@ export default function ProductosScreen() {
 
   async function fetchProductos() {
     try {
-      const res = await fetch('http://192.168.100.5:3000/api/producto/productos');
+      const res = await fetch('http://192.168.137.155:3000/api/producto/productos');
       const data = await res.json();
       setProductos(data);
     } catch (error) {
