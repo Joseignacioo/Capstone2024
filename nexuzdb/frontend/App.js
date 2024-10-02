@@ -7,6 +7,8 @@ import LoginScreen from './src/screens/LoginScreen';
 import ProductosScreen from './src/screens/ProductosScreen';
 import BalanzasScreen from './src/screens/BalanzasScreen';
 import InventariosScreen from './src/screens/InventariosScreen';
+import CrearProductoScreen from './src/screens/CrearProductoScreen';
+import CrearInventarioScreen from './src/screens/CrearInventarioScreen';
 
 const Stack = createStackNavigator();
 
@@ -21,6 +23,9 @@ const AppNavigator = () => {
           <Stack.Screen name="Productos" component={ProductosScreen} />
           <Stack.Screen name="Balanzas" component={BalanzasScreen} />
           <Stack.Screen name="Inventarios" component={InventariosScreen} />
+          <Stack.Screen name="CrearProductos" component={CrearProductoScreen} />
+          <Stack.Screen name="CrearVinculacion" component={CrearInventarioScreen} />
+          
         </>
       ) : (
         <Stack.Screen name="Login" component={LoginScreen} />

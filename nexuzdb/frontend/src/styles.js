@@ -38,14 +38,13 @@ export const styles = StyleSheet.create({
   card: {
     backgroundColor: '#f8f8f8',
     padding: 20,
-    minWidth: 300,
-    maxWidth: 300,
+    minWidth: 180,
+    maxWidth: 180,
     marginVertical: 10,
-    marginHorizontal: 16,
     borderRadius: 10,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.8,
+    shadowOpacity: 0.2,
     shadowRadius: 2,
     elevation: 5, // sombra para Android
   },
@@ -64,4 +63,17 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     width: '100%',
   },
+  card_vinculacion: {
+    backgroundColor: '#f8f8f8',
+    padding: 10,
+    minWidth: 300,
+    maxWidth: 300,
+    marginVertical: 5,
+    borderRadius: 10,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 2,
+    elevation: 5, // sombra para Android
+  }
 });

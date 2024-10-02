@@ -12,7 +12,7 @@ export default function BalanzasScreen() {
 
   async function fetchBalanzas() {
     try {
-      const res = await fetch('http://192.168.137.155:3000/api/balanza/balanzas');
+      const res = await fetch('http://192.168.100.5:3000/api/balanza/balanzas');
       const data = await res.json();
       setBalanzas(data);
     } catch (error) {

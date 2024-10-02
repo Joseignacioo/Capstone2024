@@ -4,10 +4,14 @@ import { styles } from '../styles';
 
 export default function BalanzaItem({ item }) {
   return (
-    <View style={styles.card}>
-      <Text style={styles.productoNombre}>Nombre: {item.nombre_balanza}</Text>
-      <Text style={styles.productoNombre}>ID: {item.id_unico}</Text>
-      <Text style={styles.productoNombre}>Capacidad máxima: {item.capacidad_maxima} gr</Text>
+    <View style={styles.card_vinculacion}>
+      <View>
+        <Text style={styles.productoNombre}>{item.nombre_balanza}</Text>
+        <Text style={styles.productoNombre}>{item.capacidad_maxima} Gramos</Text>
+      </View>
+      <View>
+        <Text style={{color: 'red'}}>Estado: Ocupado</Text>
+      </View>
     </View>
   );
 }
