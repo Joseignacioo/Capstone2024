@@ -1,79 +1,54 @@
 import { StyleSheet } from 'react-native';
 
-export const styles = StyleSheet.create({
+export const stylesHome = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingTop: 50,
+    margin: 20,
   },
-  title: {
-    padding: 10,
-    fontSize: 40,
+  titulo: {
+    fontSize: 25,
     fontWeight: 'bold',
-  },
-  logo: {
-    width: 150,
-    height: 150,
-    marginBottom: 20,
-  },
-  subtitle: {
-    fontSize: 20,
-    marginBottom: 20,
-  },
-  button: {
-    width: 200,
-    height: 50,
-    backgroundColor: 'grey',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 13,
-    marginBottom: 20,
-  },
-  buttonText: {
-    fontSize: 18,
-    color: '#fff',
+    margin: 5
   },
   card: {
-    backgroundColor: '#f8f8f8',
-    padding: 20,
-    minWidth: 180,
-    maxWidth: 180,
-    marginVertical: 10,
-    borderRadius: 10,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    shadowRadius: 2,
-    elevation: 5, // sombra para Android
-  },
-  form: {
-    gap: 10,
-    width: '60%',
-  },
-  input: {
-    height: 44,
-    borderWidth: 1,
-    borderRadius: 4,
-    padding: 10,
-    backgroundColor: '#fff'
-  },
-  container: {
+    flexDirection: 'row',
     alignItems: 'center',
-    width: '100%',
-  },
-  card_vinculacion: {
-    backgroundColor: '#f8f8f8',
+    justifyContent: 'space-around',
+    backgroundColor: '#ffff',
     padding: 10,
-    minWidth: 300,
-    maxWidth: 300,
     marginVertical: 5,
     borderRadius: 10,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    shadowRadius: 2,
-    elevation: 5, // sombra para Android
-  }
+  },
+  image: {
+    width: 100,
+    height: 100,
+  },
+  productoNombre: {
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  productoCantidad: {
+    fontSize: 16,
+    color: '#555',
+  },
+  productoFecha: {
+    fontSize: 14,
+    color: '#999',
+  },
+  button_create: {
+    position: 'absolute',
+    top: 10,
+    right: 10,
+    backgroundColor: 'green',
+    width: 50,
+    height: 50,
+    borderRadius: 30,
+    justifyContent: 'center',
+    alignItems: 'center',
+    zIndex: 1,
+  },
+  buttonText_create: {
+    color: 'white',
+    fontSize: 20,
+  },
 });

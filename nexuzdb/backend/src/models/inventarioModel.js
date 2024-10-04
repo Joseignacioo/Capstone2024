@@ -1,37 +1,44 @@
 import { db } from "../database/connection.js";
 
-const create = async ({ inventario_id, balanza_id, producto_id, cantidad, peso_total}) => {
-
-    const existingBalanza = await db.query('SELECT balanza_id FROM inventarios WHERE balanza_id = $1', [balanza_id]);
-
-    if (existingBalanza.rows.length > 0) {
-        throw new Error(`La balanza con ID ${balanza_id} ya está en uso.`);
-    }
-
-    const formattedDate = new Date().toISOString().replace('T', ' ').replace('Z', ''); // Usar la fecha actual
-    
-    const query = {
-        text: `
-        INSERT INTO inventarios (inventario_id, balanza_id, producto_id, cantidad, peso_total, fecha_registro)
-        VALUES ($1, $2, $3, $4, $5, $6)
-        RETURNING inventario_id, balanza_id, producto_id, cantidad, peso_total, fecha_registro
-        `,
-        values: [inventario_id, balanza_id, producto_id, cantidad, peso_total, formattedDate]
-    };
-    
-    const { rows } = await db.query(query);
-    return rows[0];
-};
 const getAllInventarios = async () => {
     const query = `
-        SELECT * 
-        FROM inventarios
+        SELECT 
+            i.id AS inventario_id,
+            p.nombre AS producto_nombre,
+            b.tipo AS balanza_tipo,
+            b.modelo AS balanza_modelo,
+            i.cantidad,
+            i.peso,
+            i.fecha
+        FROM 
+            inventario i
+        JOIN 
+            productos p ON i.producto_id = p.id
+        JOIN 
+            balanzas b ON i.balanza_id = b.id
     `;
+
     const { rows } = await db.query(query);
-    return rows;
+    return rows; // Devuelve los registros obtenidos
+
+};
+
+const createInventario = async (producto_id, balanza_id) => {
+
+    const formattedDate = new Date().toISOString().replace('T', ' ').replace('Z', ''); // Usar la fecha actual
+
+    const query = `
+        INSERT INTO inventario (producto_id, balanza_id, cantidad, peso, fecha)
+        VALUES ($1, $2, $3, $4, $5)
+        RETURNING *;
+    `;
+    const values = [producto_id, balanza_id, 0, 0, formattedDate];
+
+    const { rows } = await db.query(query, values);
+    return rows[0]; // Devuelve el inventario creado
 };
 
 export const InventarioModel = {
-    create,
-    getAllInventarios
-}
+    getAllInventarios,
+    createInventario, // Agregamos la nueva función aquí
+};

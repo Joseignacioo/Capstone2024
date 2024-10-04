@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { View, TextInput, Button, Alert, StyleSheet, Text, TouchableOpacity, ImageBackground } from 'react-native';
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../../context/AuthContext';
 
-const backgroundImage = require('../../assets/LOGO-NEXUZDB.jpeg'); // Asegúrate de que la ruta de la imagen de fondo sea correcta
+const backgroundImage = require('../../../assets/LOGO-NEXUZDB.jpeg'); // Asegúrate de que la ruta de la imagen de fondo sea correcta
 
 const LoginScreen = ({ navigation }) => {
   const { onLogin } = useAuth();

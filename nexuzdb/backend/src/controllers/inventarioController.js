@@ -1,40 +1,40 @@
 import { InventarioModel } from "../models/inventarioModel.js";
 
-const inventario = async(req, res)=>{
+const getAllInventarios = async (req, res) => {
     try {
-        console.log(req.body)
-        const { inventario_id, balanza_id, producto_id, cantidad, peso_total} = req.body
+        const inventario = await InventarioModel.getAllInventarios()
 
-        if(!inventario_id || !balanza_id || !producto_id || !cantidad || !peso_total){
-            return res.status(400).json({ok: false, msg: "falta algun parametro"})
+        return res.status(200).send(inventario)
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({
+            ok: false,
+            msg: 'error server'
+        })
+    }
+};
+const createInventario = async (req, res) => {
+    try {
+        console.log(req.body);
+        const { producto_id, balanza_id} = req.body; // No incluyas `id`
+
+        if (!producto_id || !balanza_id) {
+            return res.status(400).json({ ok: false, msg: "Faltan algunos parámetros" });
         }
-        const newInventario = await InventarioModel.create({ inventario_id, balanza_id, producto_id, cantidad, peso_total})
 
-        return res.status(201).send(newInventario)
+        const newInventario = await InventarioModel.createInventario(producto_id, balanza_id);
+
+        return res.status(201).send(newInventario);
     } catch (error) {
-        console.log(error)
+        console.log(error);
         return res.status(500).json({
             ok: false,
-            msg: 'error server'
-        })
+            msg: 'Error en el servidor',
+        });
     }
-}
-
-const getAllinventarios = async(req, res)=>{
-    try {
-        const inventarios = await InventarioModel.getAllInventarios()
-
-        return res.status(200).send(inventarios)
-    } catch (error) {
-        console.log(error)
-        return res.status(500).json({
-            ok: false,
-            msg: 'error server'
-        })
-    }
-}
+};
 
 export const InventarioController = {
-    inventario,
-    getAllinventarios
-}
+    getAllInventarios,
+    createInventario
+};

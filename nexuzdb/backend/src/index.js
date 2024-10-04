@@ -4,6 +4,8 @@ import userRouter from './routes/userRoutes.js';
 import productoRouter from './routes/productoRoutes.js'
 import balanzaRouter from './routes/balanzaRoutes.js'
 import inventarioRouter from './routes/inventarioRoutes.js'
+import historialRouter from './routes/historialInventarioRoutes.js'
+
 import { db } from './database/connection.js';
 import cors from  'cors'
 
@@ -24,6 +26,8 @@ app.use('/api/user', userRouter);
 app.use('/api/producto', productoRouter)
 app.use('/api/balanza', balanzaRouter)
 app.use('/api/inventario', inventarioRouter)
+app.use('/api/historial', historialRouter)
+
 
 
 // Función para iniciar el servidor
