@@ -2,7 +2,7 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { AuthProvider, useAuth } from './src/context/AuthContext';
-import HomeScreen from './src/screens/HomeScreen';
+import HomeScreen from './src/screens/homeScreen';
 import LoginScreen from './src/screens/auth/LoginScreen';
 import ProductosScreen from './src/screens/producto/ProductosScreen';
 import CrearProductoScreen from './src/screens/producto/CrearProductoScreen';

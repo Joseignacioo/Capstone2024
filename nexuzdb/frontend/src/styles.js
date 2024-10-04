@@ -51,4 +51,20 @@ export const stylesHome = StyleSheet.create({
     color: 'white',
     fontSize: 20,
   },
+  button_productos: {
+    position: 'absolute',
+    top: 10,
+    right: 10,
+    backgroundColor: '#39ad96',
+    width: 50,
+    height: 50,
+    borderRadius: 30,
+    justifyContent: 'center',
+    alignItems: 'center',
+    zIndex: 1,
+  },
+  buttonText_productos: {
+    color: 'white',
+    fontSize: 20,
+  }
 });

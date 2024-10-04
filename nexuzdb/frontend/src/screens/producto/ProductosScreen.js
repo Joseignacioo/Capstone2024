@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { FlatList, Text, View } from 'react-native';
 import ProductoItem from '../../components/ProductoItem';
-import { styles } from '../../styles';
+import { stylesHome } from '../../styles';
 
 export default function ProductosScreen() {
   const [productos, setProductos] = useState([]);
@@ -21,11 +21,11 @@ export default function ProductosScreen() {
   }
 
   return (
-    <View style={styles.container}>
+    <View style={stylesHome.container}>
       <FlatList
         data={productos}
         renderItem={({ item }) => <ProductoItem item={item} />}
-        keyExtractor={(item) => item.producto_id.toString()}
+        keyExtractor={(item) => item.producto_id}
         ListEmptyComponent={<Text>No hay productos disponibles</Text>}
       />
     </View>

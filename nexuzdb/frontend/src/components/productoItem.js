@@ -1,13 +1,20 @@
 import React from 'react';
-import { View, Text } from 'react-native';
-import { styles } from '../styles';
+import { View, Text, Image } from 'react-native';
+import { stylesHome } from '../styles';
+
+const logo = require('../../assets/iphone11.png');
 
 export default function ProductoItem({ item }) {
   return (
-    <View style={styles.card}>
-      <Text style={styles.productoNombre}>Nombre: {item.nombre_producto}</Text>
-      <Text style={styles.productoNombre}>Desc: {item.descripcion}</Text>
-      <Text style={styles.productoNombre}>Peso: {item.peso_unitario} gr</Text>
+    <View style={stylesHome.card}>
+      <View>
+        <Image source={logo} style={stylesHome.image} />
+      </View>
+      <View>
+        <Text style={stylesHome.productoNombre}>ID: {item.id}</Text>
+        <Text style={stylesHome.productoCantidad}>{item.nombre}</Text>
+        <Text style={stylesHome.productoFecha}>{item.peso_unitario} gr</Text>
+      </View>
     </View>
   );
 }

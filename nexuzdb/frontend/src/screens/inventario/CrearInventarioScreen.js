@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, FlatList,Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
+import { View, FlatList,Text, TextInput, Button, StyleSheet, Alert, TouchableOpacity } from 'react-native';
 import axios from 'axios';
 import BalanzaItem from '../../components/BalanzaItem';
 import { stylesHome } from '../../styles';
@@ -28,21 +28,30 @@ export default function BalanzasScreen() {
   const CrearVinculacion = async () => {
     try {
         const response = await axios.post('http://192.168.100.5:3000/api/inventario/create', {
-            producto_id: productoId, // Asegúrate de que el nombre sea correcto
-            balanza_id: balanzaId // Asegúrate de que el nombre sea correcto
+            producto_id: productoId, 
+            balanza_id: balanzaId 
         });
         if (response.status === 201) {
             Alert.alert('Éxito', 'Inventario creado exitosamente');
-            navigation.navigate('Home'); // Redirige a la pantalla de inicio
+            navigation.navigate('Home'); 
         }
     } catch (error) {
-        console.error('Error al crear inventario:', error); // Registra el error
+        console.error('Error al crear inventario:', error); 
         Alert.alert('Error', 'Hubo un problema al crear el inventario');
     }
 };
 
   return (
     <View style={stylesHome.container}>
+      <View>
+        <Text style={styles1.title}>Productos Disponibles</Text>
+        <TouchableOpacity
+          style={stylesHome.button_productos}
+          onPress={() => navigation.navigate('Productos')}
+        >
+          <Text style={stylesHome.buttonText_productos}>+</Text>
+        </TouchableOpacity>
+      </View>
       <View>
       <Text style={styles1.title}>Balanzas disponibles</Text>
       <FlatList

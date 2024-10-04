@@ -12,7 +12,7 @@ export default function InventarioItem({ item }) {
       </View>
       <View>
         <Text style={stylesHome.productoNombre}>Balanza: {item.balanza_modelo}</Text>
-        <Text style={stylesHome.productoNombre}>Producto: {item.producto_nombre}</Text>
+        <Text style={stylesHome.productoCantidad}>Producto: {item.producto_nombre}</Text>
         <Text style={stylesHome.productoNombre}>STOCK: {item.cantidad}</Text>
         <Text style={{color: 'green'}}>Estado: ACTIVO</Text>
       </View>
