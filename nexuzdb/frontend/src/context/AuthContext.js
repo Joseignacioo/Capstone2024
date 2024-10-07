@@ -13,7 +13,7 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }) => {
   const [authState, setAuthState] = useState({
     token: null,
-    authenticated: false, // Cambiado a false por defecto
+    authenticated: false,
   });
 
   useEffect(() => {
@@ -23,7 +23,7 @@ export const AuthProvider = ({ children }) => {
         axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
         setAuthState({ token, authenticated: true });
       } else {
-        setAuthState({ token: null, authenticated: false }); // Cambiado a false
+        setAuthState({ token: null, authenticated: false });
       }
     };
     loadToken();
@@ -45,12 +45,10 @@ export const AuthProvider = ({ children }) => {
       await SecureStore.setItemAsync(TOKEN_KEY, result.data.token);
       return result;
     } catch (e) {
-      // Manejo robusto de errores
+
       if (e.response) {
-        // Si la respuesta existe, maneja el error específico
         return { error: true, msg: e.response.data.msg || 'Error desconocido' };
       } else {
-        // Manejo de errores de red o otros problemas
         return { error: true, msg: 'Error de red o servidor' };
       }
     }
@@ -59,7 +57,7 @@ export const AuthProvider = ({ children }) => {
   const logout = async () => {
     await SecureStore.deleteItemAsync(TOKEN_KEY);
     axios.defaults.headers.common["Authorization"] = "";
-    setAuthState({ token: null, authenticated: false }); // Cambiado a false
+    setAuthState({ token: null, authenticated: false });
   };
 
   const value = {

@@ -14,13 +14,13 @@ const AppNavigator = () => {
   const { authState } = useAuth();
 
   return (
-    <Stack.Navigator initialRouteName="Home">
+    <Stack.Navigator initialRouteName="NexuzDB" >
       {authState?.authenticated ? (
         <>
-          <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen  name="NexuzDB" component={HomeScreen} />
           <Stack.Screen name="Productos" component={ProductosScreen} />
           <Stack.Screen name="CrearProductos" component={CrearProductoScreen} />
-          <Stack.Screen name="CrearVinculacion" component={CrearInventarioScreen} />
+          <Stack.Screen name="Vinculacion" component={CrearInventarioScreen} />
           
         </>
       ) : (

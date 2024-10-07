@@ -5,9 +5,13 @@ export const stylesHome = StyleSheet.create({
     flex: 1,
     margin: 20,
   },
+  nav: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+  },
   titulo: {
     fontSize: 25,
-    fontWeight: 'bold',
     margin: 5
   },
   card: {
@@ -36,35 +40,36 @@ export const stylesHome = StyleSheet.create({
     color: '#999',
   },
   button_create: {
-    position: 'absolute',
-    top: 10,
-    right: 10,
+
     backgroundColor: 'green',
     width: 50,
     height: 50,
     borderRadius: 30,
     justifyContent: 'center',
     alignItems: 'center',
-    zIndex: 1,
   },
   buttonText_create: {
     color: 'white',
     fontSize: 20,
   },
   button_productos: {
-    position: 'absolute',
-    top: 10,
-    right: 10,
-    backgroundColor: '#39ad96',
+    backgroundColor: 'green',
     width: 50,
     height: 50,
     borderRadius: 30,
     justifyContent: 'center',
     alignItems: 'center',
-    zIndex: 1,
   },
   buttonText_productos: {
     color: 'white',
     fontSize: 20,
+  },
+  input: {
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
+    marginBottom: 15,
+    paddingHorizontal: 10,
+
   }
 });
