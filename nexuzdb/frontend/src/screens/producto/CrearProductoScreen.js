@@ -23,7 +23,7 @@ export default function CrearProductoScreen({ navigation }) {
 
       if (response.status === 201) {
         Alert.alert('Éxito', 'Producto creado exitosamente');
-        navigation.navigate('Productos'); // Redirige a la pantalla de productos después de crear
+        navigation.navigate('Productos');
       }
     } catch (error) {
       console.error(error);
