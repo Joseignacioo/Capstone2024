@@ -144,6 +144,7 @@ export default function ProductoScreen({ navigation }) {
                                 style={styles.productImage}
                             />
                             <View style={styles.productDetails}>
+                                <Text style={styles.productText}># {item.id}</Text>
                                 <Text style={styles.productText}>{item.nombre}</Text>
                                 <Text style={styles.productText}>Peso: {item.peso_unitario} kg</Text>
                             </View>

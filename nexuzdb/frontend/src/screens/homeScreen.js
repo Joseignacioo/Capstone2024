@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, FlatList } from 'react-native';
-import InventarioItem from '../components/inventarioItem';
+import InventarioItem from '../components/InventarioItem';
 import HistorialInventario from '../components/HistorialInventarioItem';
 import { stylesHome } from '../styles';
 
@@ -26,7 +26,7 @@ export default function HomeScreen({ navigation }) {
 
   async function fetchInventarios() {
     try {
-      const res = await fetch('http://192.168.100.5:3000/api/inventario/inventarios');
+      const res = await fetch('http://172.20.10.2:3000/api/inventario/inventarios');
       const data = await res.json();
       setInventarios(data);
     } catch (error) {
@@ -36,7 +36,7 @@ export default function HomeScreen({ navigation }) {
 
   async function fetchHistorialInventarios() {
     try {
-      const res = await fetch('http://192.168.100.5:3000/api/historial/historiales');
+      const res = await fetch('http://172.20.10.2:3000/api/historial/historiales');
       const data = await res.json();
       setHistorialInventarios(data);
     } catch (error) {
