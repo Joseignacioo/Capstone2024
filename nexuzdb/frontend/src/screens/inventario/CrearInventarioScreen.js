@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, FlatList,Text, TextInput, Button, Alert, TouchableOpacity } from 'react-native';
 import axios from 'axios';
-import BalanzaItem from '../../components/balanzaItem';
+import BalanzaItem from '../../components/BalanzaItem';
 import { stylesHome } from '../../styles';
 import { useNavigation } from '@react-navigation/native';
 
@@ -18,7 +18,7 @@ export default function BalanzasScreen() {
 
   async function fetchBalanzas() {
     try {
-      const res = await fetch('http://192.168.100.5:3000/api/balanza/balanzas');
+      const res = await fetch('http://172.20.10.2:3000/api/balanza/balanzas');
       const data = await res.json();
       setBalanzas(data);
     } catch (error) {
@@ -27,7 +27,7 @@ export default function BalanzasScreen() {
   }
   const CrearVinculacion = async () => {
     try {
-        const response = await axios.post('http://192.168.100.5:3000/api/inventario/create', {
+        const response = await axios.post('http://172.20.10.2:3000/api/inventario/create', {
             producto_id: productoId, 
             balanza_id: balanzaId 
         });
@@ -36,8 +36,7 @@ export default function BalanzasScreen() {
             navigation.navigate('NexuzDB'); 
         }
     } catch (error) {
-        console.error('Error al crear inventario:', error); 
-        Alert.alert('Error', 'Hubo un problema al crear el inventario');
+        Alert.alert('Error', 'La Balanza ya esta en uso');
     }
 };
 

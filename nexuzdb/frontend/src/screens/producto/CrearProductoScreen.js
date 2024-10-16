@@ -12,7 +12,7 @@ export default function CrearProductoScreen({ navigation }) {
 
   const crearProducto = async () => {
     try {
-      const response = await axios.post('http://192.168.100.5:3000/api/producto/create', {
+      const response = await axios.post('http://172.20.10.2:3000/api/producto/create', {
         producto_id,
         nombre_producto,
         codigo_barras,
