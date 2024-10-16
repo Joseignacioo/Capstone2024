@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, FlatList } from 'react-native';
-import InventarioItem from '../components/InventarioItem';
+import InventarioItem from '../components/inventarioItem';
 import HistorialInventario from '../components/HistorialInventarioItem';
 import { stylesHome } from '../styles';
 
