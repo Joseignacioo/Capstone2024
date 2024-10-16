@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, Alert, StyleSheet, Text, TouchableOpacity, ImageBackground } from 'react-native';
+import { View, TextInput, Alert, StyleSheet, Text, TouchableOpacity, ImageBackground, KeyboardAvoidingView, Platform, ScrollView, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { useAuth } from '../../context/AuthContext';
 
-const backgroundImage = require('../../../assets/LOGO-NEXUZDB.jpeg'); 
+const backgroundImage = require('../../../assets/LOGO-NEXUZDB.jpeg'); // Asegúrate de que la ruta de la imagen de fondo sea correcta
 
 const LoginScreen = ({ navigation }) => {
   const { onLogin } = useAuth();
@@ -10,62 +10,98 @@ const LoginScreen = ({ navigation }) => {
   const [password, setPassword] = useState('');
 
   const handleLogin = async () => {
-    const result = await onLogin(email, password);
-    if (result.error) {
-      Alert.alert('Error de autenticación', 'Las credenciales no son válidas.', [{ text: 'OK' }]);
-      console.log('No autorizado');
-    } else {
-      console.log('Login exitoso', result);
-      navigation.replace('Home'); 
+    if (!email || !password) {
+      Alert.alert('Campos vacíos', 'Por favor, ingresa tu correo y contraseña.', [{ text: 'OK' }]);
+      return;
+    }
+  
+    try {
+      const result = await onLogin(email, password);
+  
+      //console.log(result); // Verifica el resultado
+  
+      // Verifica si no hay error en el resultado
+      if (!result.error) {
+        console.log('Login exitoso');
+        navigation.replace('Home'); // Login exitoso, redirige al home
+      } else {
+        Alert.alert('Error de autenticación', result.msg || 'Las credenciales no son válidas.', [{ text: 'OK' }]);
+        console.log('No autorizado: ', result.error);
+      }
+    } catch (error) {
+      console.error('Error en el proceso de login:', error);
+      Alert.alert('Error inesperado', 'Ha ocurrido un problema al intentar iniciar sesión.', [{ text: 'OK' }]);
     }
   };
+  
 
   return (
-    <ImageBackground source={backgroundImage} style={styles.container}>
-      <View style={styles.innerContainer}>
-        <Text style={styles.title}>Iniciar Sesión</Text>
-        
-        <TextInput
-          style={styles.input}
-          placeholder="Correo electrónico"
-          onChangeText={setEmail}
-          value={email}
-          keyboardType="email-address"
-          autoCapitalize="none"
-        />
-        
-        <TextInput
-          style={styles.input}
-          placeholder="Contraseña"
-          secureTextEntry
-          onChangeText={setPassword}
-          value={password}
-          autoCapitalize="none"
-        />
-        
-        <TouchableOpacity style={styles.button} onPress={handleLogin}>
-          <Text style={styles.buttonText}>Iniciar Sesión</Text>
-        </TouchableOpacity>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <ImageBackground source={backgroundImage} style={styles.container}>
+        <KeyboardAvoidingView
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+          keyboardVerticalOffset={Platform.OS === 'ios' ? 100 : 0} 
+          style={styles.keyboardContainer}
+        >
+          <ScrollView contentContainerStyle={styles.scrollContainer}>
+            <View style={styles.innerContainer}>
+              <Text style={styles.title}>Iniciar Sesión</Text>
 
-        <TouchableOpacity onPress={() => navigation.navigate('Register')}>
-          <Text style={styles.registerText}>¿No tienes una cuenta? Regístrate</Text>
-        </TouchableOpacity>
-      </View>
-    </ImageBackground>
+              <TextInput
+                style={styles.input}
+                placeholder="Correo electrónico"
+                onChangeText={setEmail}
+                value={email}
+                keyboardType="email-address"
+                autoCapitalize="none"
+                autoComplete="off"
+                autoCorrect={false}
+                textContentType="oneTimeCode"
+              />
+
+              <TextInput
+                style={styles.input}
+                placeholder="Contraseña"
+                secureTextEntry
+                onChangeText={setPassword}
+                value={password}
+                autoCapitalize="none"
+                textContentType="password"
+              />
+
+              <TouchableOpacity style={styles.button} onPress={handleLogin}>
+                <Text style={styles.buttonText}>Iniciar Sesión</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity onPress={() => navigation.navigate('Register')}>
+                <Text style={styles.registerText}>¿No tienes una cuenta? Regístrate</Text>
+              </TouchableOpacity>
+            </View>
+          </ScrollView>
+        </KeyboardAvoidingView>
+      </ImageBackground>
+    </TouchableWithoutFeedback>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  keyboardContainer: {
+    flex: 1,
+    justifyContent: 'center',
+  },
+  scrollContainer: {
+    flexGrow: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
   innerContainer: {
-    backgroundColor: 'rgba(255, 255, 255, 0.8)',
+    backgroundColor: 'rgba(255, 255, 255, 0.8)', 
     padding: 20,
     borderRadius: 10,
-    width: '90%',
+    width: '90%', 
     alignItems: 'center',
   },
   title: {
@@ -80,13 +116,13 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     marginBottom: 15,
     paddingHorizontal: 10,
-    width: '100%', 
+    width: '100%',
   },
   button: {
-    backgroundColor: '#007BFF',
+    backgroundColor: '#007BFF', 
     padding: 10,
     borderRadius: 5,
-    width: '100%', 
+    width: '100%',
   },
   buttonText: {
     color: 'white',
@@ -95,7 +131,7 @@ const styles = StyleSheet.create({
   },
   registerText: {
     marginTop: 15,
-    color: '#007BFF', 
+    color: '#007BFF',
   },
 });
 
