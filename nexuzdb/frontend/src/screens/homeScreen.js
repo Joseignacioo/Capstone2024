@@ -13,8 +13,15 @@ export default function HomeScreen({ navigation }) {
       fetchInventarios();
       fetchHistorialInventarios();
     });
-
-    return unsubscribe;
+     const intervalId = setInterval(() => {
+      fetchInventarios();
+      fetchHistorialInventarios();
+    }, 1000);
+    
+    return () => {
+      unsubscribe();
+      clearInterval(intervalId);
+    };
   }, [navigation]); 
 
   async function fetchInventarios() {
