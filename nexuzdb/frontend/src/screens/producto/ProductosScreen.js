@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { FlatList, Text, View } from 'react-native';
-import ProductoItem from '../../components/ProductoItem';
+import ProductoItem from '../../components/productoItem';
 import { stylesHome } from '../../styles';
 
 export default function ProductosScreen() {

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, FlatList,Text, TextInput, Button, Alert, TouchableOpacity } from 'react-native';
 import axios from 'axios';
-import BalanzaItem from '../../components/BalanzaItem';
+import BalanzaItem from '../../components/balanzaItem';
 import { stylesHome } from '../../styles';
 import { useNavigation } from '@react-navigation/native';
 
