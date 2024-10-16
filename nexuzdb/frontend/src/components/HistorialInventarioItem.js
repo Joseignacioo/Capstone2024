@@ -5,9 +5,9 @@ import { stylesHome } from '../styles';
 const logo = require('../../assets/iphone11.png');
 
 export default function HistorialInventarioItem({ item }) {
-  // Verifica si item y item.producto_nombre están definidos
+
   if (!item || !item.producto_nombre) {
-    return null; // Si no hay item o producto_nombre, no renderiza nada
+    return null; 
   }
 
   return (

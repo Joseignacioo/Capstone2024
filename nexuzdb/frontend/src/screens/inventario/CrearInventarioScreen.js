@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { View, FlatList,Text, TextInput, Button, StyleSheet, Alert, TouchableOpacity } from 'react-native';
+import { View, FlatList,Text, TextInput, Button, Alert, TouchableOpacity } from 'react-native';
 import axios from 'axios';
-import BalanzaItem from '../../components/BalanzaItem';
+import BalanzaItem from '../../components/balanzaItem';
 import { stylesHome } from '../../styles';
 import { useNavigation } from '@react-navigation/native';
 
@@ -33,7 +33,7 @@ export default function BalanzasScreen() {
         });
         if (response.status === 201) {
             Alert.alert('Éxito', 'Inventario creado exitosamente');
-            navigation.navigate('Home'); 
+            navigation.navigate('NexuzDB'); 
         }
     } catch (error) {
         console.error('Error al crear inventario:', error); 
@@ -43,8 +43,8 @@ export default function BalanzasScreen() {
 
   return (
     <View style={stylesHome.container}>
-      <View>
-        <Text style={styles1.title}>Productos Disponibles</Text>
+      <View style={stylesHome.nav}>
+        <Text style={stylesHome.productoCantidad}>Productos Disponibles </Text>
         <TouchableOpacity
           style={stylesHome.button_productos}
           onPress={() => navigation.navigate('Productos')}
@@ -53,7 +53,7 @@ export default function BalanzasScreen() {
         </TouchableOpacity>
       </View>
       <View>
-      <Text style={styles1.title}>Balanzas disponibles</Text>
+      <Text style={stylesHome.titulo}>Balanzas disponibles</Text>
       <FlatList
         data={balanzas}
         renderItem={({ item }) => <BalanzaItem item={item} />}
@@ -62,42 +62,22 @@ export default function BalanzasScreen() {
       />
       </View>
       <View>
-        <Text style={styles1.title}>Crear vinculacion</Text>
+        <Text style={stylesHome.titulo}>Crear vinculacion</Text>
         <TextInput
-          style={styles1.input}
+          style={stylesHome.input}
           placeholder="ID del Producto"
           value={productoId}
           onChangeText={setProductoId}
         />
         <TextInput
-          style={styles1.input}
+          style={stylesHome.input}
           placeholder="ID de la Balanza"
           value={balanzaId}
           onChangeText={setBalanzaId}
         />
-        <Button title="Crear Inventario" onPress={CrearVinculacion} />
+        <Button title="VINCULAR" onPress={CrearVinculacion} />
       </View>
     </View>
     
   );
 }
-const styles1 = StyleSheet.create({
-  container: {
-
-  },
-  title: {
-    fontSize: 24,
-    marginBottom: 20,
-    marginTop: 20,
-    textAlign: '',
-  },
-  input: {
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
-    marginBottom: 15,
-    paddingHorizontal: 10,
-    width: 300
-
-  },
-});

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, TextInput, Button, Alert, StyleSheet, Text, TouchableOpacity, ImageBackground } from 'react-native';
 import { useAuth } from '../../context/AuthContext';
 
-const backgroundImage = require('../../../assets/LOGO-NEXUZDB.jpeg'); // Asegúrate de que la ruta de la imagen de fondo sea correcta
+const backgroundImage = require('../../../assets/LOGO-NEXUZDB.jpeg'); 
 
 const LoginScreen = ({ navigation }) => {
   const { onLogin } = useAuth();
@@ -16,7 +16,7 @@ const LoginScreen = ({ navigation }) => {
       console.log('No autorizado');
     } else {
       console.log('Login exitoso', result);
-      navigation.replace('Home');  // Redirecciona a la pantalla Home
+      navigation.replace('Home'); 
     }
   };
 
@@ -62,10 +62,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   innerContainer: {
-    backgroundColor: 'rgba(255, 255, 255, 0.8)', // Fondo blanco semitransparente
+    backgroundColor: 'rgba(255, 255, 255, 0.8)',
     padding: 20,
     borderRadius: 10,
-    width: '90%', // Ancho del contenedor
+    width: '90%',
     alignItems: 'center',
   },
   title: {
@@ -80,13 +80,13 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     marginBottom: 15,
     paddingHorizontal: 10,
-    width: '100%', // Ancho del input
+    width: '100%', 
   },
   button: {
-    backgroundColor: '#007BFF', // Color azul para el botón
+    backgroundColor: '#007BFF',
     padding: 10,
     borderRadius: 5,
-    width: '100%', // Ancho del botón
+    width: '100%', 
   },
   buttonText: {
     color: 'white',
@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
   },
   registerText: {
     marginTop: 15,
-    color: '#007BFF', // Color azul para el texto de registro
+    color: '#007BFF', 
   },
 });
 
