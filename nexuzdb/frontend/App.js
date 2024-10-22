@@ -7,6 +7,7 @@ import LoginScreen from './src/screens/auth/LoginScreen';
 import ProductosScreen from './src/screens/producto/ProductosScreen';
 import CrearProductoScreen from './src/screens/producto/CrearProductoScreen';
 import CrearInventarioScreen from './src/screens/inventario/CrearInventarioScreen';
+import EditInventario from './src/screens/inventario/EditInventario';
 import { TouchableOpacity, Text } from 'react-native';
 
 const Stack = createStackNavigator();
@@ -34,7 +35,7 @@ const AppNavigator = () => {
           <Stack.Screen name="Productos" component={ProductosScreen} />
           <Stack.Screen name="CrearProductos" component={CrearProductoScreen} />
           <Stack.Screen name="Vinculacion" component={CrearInventarioScreen} />
-          
+          <Stack.Screen name='EditInventario' component={EditInventario}/>
         </>
       ) : (
         <Stack.Screen name="Login" component={LoginScreen} />
