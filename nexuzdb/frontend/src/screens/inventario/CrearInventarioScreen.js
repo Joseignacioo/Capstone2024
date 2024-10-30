@@ -18,7 +18,7 @@ export default function BalanzasScreen() {
 
   async function fetchBalanzas() {
     try {
-      const res = await fetch('http://172.20.10.2:3000/api/balanza/balanzas');
+      const res = await fetch('http://172.20.10.2:4000/api/balanza/balanzas');
       const data = await res.json();
       setBalanzas(data);
     } catch (error) {
@@ -27,7 +27,7 @@ export default function BalanzasScreen() {
   }
   const CrearVinculacion = async () => {
     try {
-        const response = await axios.post('http://172.20.10.2:3000/api/inventario/create', {
+        const response = await axios.post('http://172.20.10.2:4000/api/inventario/create', {
             producto_id: productoId, 
             balanza_id: balanzaId 
         });
