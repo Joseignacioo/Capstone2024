@@ -42,7 +42,22 @@ const login = async(req, res)=>{
     }
 }
 
+const getAllUsers = async(req, res)=>{
+    try {
+        const users = await UserModel.getAllUsers()
+
+        return res.status(200).send(users)
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({
+            ok: false,
+            msg: 'error server'
+        })
+    }
+}
+
 export const userController = {
     register,
-    login
+    login,
+    getAllUsers
 }
