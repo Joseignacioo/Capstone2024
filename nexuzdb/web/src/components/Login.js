@@ -22,29 +22,34 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <h2>Iniciar Sesión</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Email:</label>
-          <input 
+    <div className='login'>
+      <div className='card-form'>
+      <div className="title3">
+          <h1 className="poppins-regular">Iniciar Sesión</h1>
+        </div>
+      <form onSubmit={handleSubmit} className='form'>
+        <div className='form-input'>
+          <label className='poppins-regular'>Email:</label>
+          <input className='poppins-regular'
             type="email" 
             value={email} 
             onChange={(e) => setEmail(e.target.value)} 
             required 
           />
         </div>
-        <div>
-          <label>Contraseña:</label>
-          <input 
+        <div className='form-input'>
+          <label  className='poppins-regular'>Contraseña:</label>
+          <input className='poppins-regular'
             type="password" 
             value={password} 
             onChange={(e) => setPassword(e.target.value)} 
             required 
           />
         </div>
-        <button type="submit">Iniciar Sesión</button>
+        <br></br>
+        <button className='btn poppins-regular' type="submit">Iniciar Sesión</button>
       </form>
+      </div>
     </div>
   );
 };

@@ -371,3 +371,9 @@
     .form-input{
         display: grid;
     }
+    .login{
+        margin-top: 5rem;
+        display: flex;
+        justify-content: center;
+
+    }
