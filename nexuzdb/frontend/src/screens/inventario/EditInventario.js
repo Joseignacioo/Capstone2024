@@ -15,28 +15,35 @@ export default function EditInventario({ route, navigation }) {
       return unsubscribe;
   }, [navigation]);
 
-    const handleUpdate = async () => {
-        try {
-            const response = await fetch(`http://172.20.10.2:3000/api/inventario/update/${inventario.inventario_id}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ nuevo_producto_id: nuevoProductoId }), // Asegúrate de que aquí se envíe correctamente
-            });
+  const handleUpdate = async () => {
+    //console.log('ID enviado:', inventario.inventario_id);  // Cambiado a inventario.inventario_id
+    //console.log('Nuevo Producto ID:', nuevoProductoId);
 
-            if (response.ok) {
-                const data = await response.json(); // Obtén la respuesta JSON
-                console.log("Inventario actualizado:", data.inventario);
-                navigation.goBack(); // Regresar a la pantalla anterior
-            } else {
-                const errorData = await response.json();
-                console.error("Error al actualizar el inventario:", errorData);
-            }
-        } catch (error) {
-            console.error("Error al hacer la solicitud de actualización:", error);
+    try {
+        const response = await fetch(`https://28gd8p3u4a.execute-api.us-east-2.amazonaws.com/dev/edit_inventario`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                id: inventario.inventario_id,  // Usando inventario.inventario_id
+                nuevo_producto_id: nuevoProductoId,
+            }),
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            //console.log("Inventario actualizado:", data.inventario);
+            navigation.goBack();
+        } else {
+            const errorData = await response.json();
+            console.error("Error al actualizar el inventario:", errorData);
         }
-    };
+    } catch (error) {
+        console.error("Error al hacer la solicitud de actualización:", error);
+    }
+};
+
 
     async function fetchProductos() {
       try {
