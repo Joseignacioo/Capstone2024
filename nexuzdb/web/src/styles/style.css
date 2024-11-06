@@ -70,9 +70,16 @@
             display: flex;
             justify-content: space-around;
             align-items: center;
+            .line{
+                width: 50%;
+                height: 50px;
+                background-color: #eea641;
+                border-radius: 0px 30px 0px 0px;
+            }
 
             .title{
-                width: 350px;
+                width: 500px;
+                text-align: center;
                 h1{
                     font-size: 5rem;
                     font-weight: 500;
@@ -85,8 +92,15 @@
                     text-shadow: 0px 0px 8px #000000;
                 }
             }
+            video{
+                width: 50%;
+                box-shadow: 0px 0px 10px #000000;
+            }
             img{
                 width: 300px;
+                height: 400px;
+                margin: 0.5rem;
+                box-shadow: 0px 0px 10px #000000;
             }
         }
 
