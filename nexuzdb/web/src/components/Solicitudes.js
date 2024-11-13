@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Solicitudes = () => {
   const [solicitudes, setSolicitudes] = useState([]);
+  const navigate = useNavigate();  // Replaced useHistory with useNavigate
 
   useEffect(() => {
     const fetchSolicitudes = async () => {
@@ -11,8 +13,8 @@ const Solicitudes = () => {
           throw new Error('Error al obtener las solicitudes');
         }
         const data = await response.json();
-        console.log('Datos obtenidos:', data); // Verifica los datos aquí
-        setSolicitudes(data.data); // Accede a la propiedad 'data'
+        console.log('Datos obtenidos:', data);
+        setSolicitudes(data.data);
       } catch (error) {
         console.error('Error:', error);
       }
@@ -31,7 +33,6 @@ const Solicitudes = () => {
         throw new Error('Error al eliminar la solicitud');
       }
 
-      // Actualiza el estado para eliminar la solicitud de la interfaz
       setSolicitudes((prevSolicitudes) => 
         prevSolicitudes.filter((solicitud) => solicitud.id !== id)
       );
@@ -74,7 +75,9 @@ const Solicitudes = () => {
                       <td>{solicitud.correo}</td>
                       <td>{`${solicitud.nombre} ${solicitud.apellido}`}</td>
                       <td>{solicitud.celular}</td>
-                      <td><a href='.'>Notificar</a></td>
+                      <td>
+                        <button onClick={() => navigate('/enviarCorreo')}>Notificar</button>
+                      </td>
                       <td>
                         <button onClick={() => handleDelete(solicitud.id)}>Eliminar</button>
                       </td>
@@ -95,3 +98,4 @@ const Solicitudes = () => {
 };
 
 export default Solicitudes;
+

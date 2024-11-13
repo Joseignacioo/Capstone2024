@@ -6,6 +6,7 @@ import balanzaRouter from './routes/balanzaRoutes.js'
 import inventarioRouter from './routes/inventarioRoutes.js'
 import historialRouter from './routes/historialInventarioRoutes.js'
 import SolicitudesRouter from './routes/solicitudesRoutes.js'
+import correo from './routes/emailRoutes.js'
 
 import { db } from './database/connection.js';
 import cors from  'cors'
@@ -29,6 +30,7 @@ app.use('/api/balanza', balanzaRouter)
 app.use('/api/inventario', inventarioRouter)
 app.use('/api/historial', historialRouter)
 app.use('/api/solicitudes', SolicitudesRouter)
+app.use('/api/email', correo)
 
 
 

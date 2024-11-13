@@ -10,6 +10,7 @@ import Nosotros from './components/Nosotros';
 import Login from './components/Login';
 import ProtectedRoute from './components/ProtectedRoute';
 import { AuthProvider } from './context/AuthContext';
+import Correo from './components/Correo';
 
 const App = () => (
   <AuthProvider>
@@ -43,6 +44,14 @@ const App = () => (
           element={
             <ProtectedRoute>
               <CrearUsuarios />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/enviarCorreo" 
+          element={
+            <ProtectedRoute>
+              <Correo />
             </ProtectedRoute>
           } 
         />
