@@ -25,7 +25,17 @@ const findOneEmail = async(email) => {
     return rows[0]
 }
 
+const getAllUsers = async () => {
+    const query = `
+        SELECT * 
+        FROM usuarios
+    `;
+    const { rows } = await db.query(query);
+    return rows;
+};
+
 export const UserModel = {
     create,
-    findOneEmail
+    findOneEmail,
+    getAllUsers
 }

@@ -34,7 +34,29 @@ const createInventario = async (req, res) => {
     }
 };
 
+
+const updateInventarioProducto = async (req, res) => {
+    try {
+        const { nuevo_producto_id } = req.body;
+        const inventario_id = req.params.inventario_id; // Obtener el ID desde los parámetros de la URL
+
+        if (!inventario_id || !nuevo_producto_id) {
+            return res.status(400).json({ ok: false, msg: "Faltan algunos parámetros" });
+        }
+
+        const updatedInventario = await InventarioModel.updateInventarioProducto(inventario_id, nuevo_producto_id);
+        return res.status(200).json({ ok: true, inventario: updatedInventario });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            ok: false,
+            msg: 'Error en el servidor',
+        });
+    }
+};
+
 export const InventarioController = {
     getAllInventarios,
-    createInventario
+    createInventario,
+    updateInventarioProducto, // Agregamos la nueva función aquí
 };

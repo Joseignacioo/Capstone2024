@@ -5,14 +5,16 @@ import productoRouter from './routes/productoRoutes.js'
 import balanzaRouter from './routes/balanzaRoutes.js'
 import inventarioRouter from './routes/inventarioRoutes.js'
 import historialRouter from './routes/historialInventarioRoutes.js'
+import SolicitudesRouter from './routes/solicitudesRoutes.js'
+import correo from './routes/emailRoutes.js'
 
 import { db } from './database/connection.js';
 import cors from  'cors'
 
 
 const corsOptions = {
-  origin: "http://localhost:8081",
-  methods: ["POST", "GET"],
+  origin: "http://localhost:3000",
+  methods: ["POST", "GET", "DELETE"],
   credentials: true
 }
 
@@ -27,6 +29,8 @@ app.use('/api/producto', productoRouter)
 app.use('/api/balanza', balanzaRouter)
 app.use('/api/inventario', inventarioRouter)
 app.use('/api/historial', historialRouter)
+app.use('/api/solicitudes', SolicitudesRouter)
+app.use('/api/email', correo)
 
 
 
@@ -38,7 +42,7 @@ const startServer = async () => {
     console.log('Conexión a la base de datos establecida');
 
     // Definir puerto y escuchar
-    const PORT = 3000;  // Usa el puerto de .env o el 3000 como fallback
+    const PORT = 4000;  // Usa el puerto de .env o el 3000 como fallback
     app.listen(PORT, () => {
       console.log(`Servidor corriendo en el puerto ${PORT}`);
     });
