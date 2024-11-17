@@ -1,31 +1,60 @@
-import React from 'react';
-import { Link, useNavigate } from 'react-router-dom'; // Asegúrate de importar useNavigate
-import { useAuth } from '../context/AuthContext'; // Asegúrate de importar el contexto de autenticación
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 const Navbar = () => {
-  const { authState, onLogout } = useAuth(); // Obtener el estado de autenticación y la función de logout
-  const navigate = useNavigate(); // Inicializa useNavigate
+  const { authState, onLogout } = useAuth();
+  const navigate = useNavigate();
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const handleLogout = () => {
-    onLogout(); // Llama a la función de logout desde el contexto
-    navigate('/'); // Redirige al Home después de cerrar sesión
+    onLogout();
+    navigate('/');
+    setMenuOpen(false); // Cierra el menú después de cerrar sesión
+  };
+
+  const toggleMenu = () => {
+    setMenuOpen((prevState) => !prevState); // Alterna el estado del menú
   };
 
   return (
     <nav>
-      <h2 className="poppins-light">NEXUZ<span>DB</span></h2>
-      <ul>
-        <li><Link to="/">Home</Link></li>
-        <li><Link to="/contacto">Contacto</Link></li>
-        <li><Link to="/nosotros">Nosotros</Link></li>
+      <h2 className="poppins-light">
+        NEXUZ<span>DB</span>
+      </h2>
+      <div
+        className="menu-icon"
+        onClick={toggleMenu}
+        role="button"
+        aria-label="Toggle Menu"
+        tabIndex={0}
+      >
+        &#9776; {/* Ícono del menú hamburguesa */}
+      </div>
+      <ul className={menuOpen ? 'active' : '' }>
+        <li className='poppins-regular'>
+          <Link to="/" onClick={() => setMenuOpen(false)}>Home</Link>
+        </li>
+        <li className='poppins-regular'>
+          <Link to="/contacto" onClick={() => setMenuOpen(false)}>Contacto</Link>
+        </li>
+        <li className='poppins-regular'>
+          <Link to="/nosotros" onClick={() => setMenuOpen(false)}>Nosotros</Link>
+        </li>
 
         {authState.authenticated ? (
           <>
-            <li><Link to="/dashboard">ADMIN</Link></li>
-            <li><button className='poppins-light' onClick={handleLogout}>Cerrar Sesión</button></li>
+            <li className='poppins-regular'>
+              <Link to="/dashboard" onClick={() => setMenuOpen(false)}>ADMIN</Link>
+            </li>
+            <li>
+              <button className='poppins-regular btnc' onClick={handleLogout}>CERRAR SESIÓN</button>
+            </li>
           </>
         ) : (
-          <li><Link to="/login">Iniciar Sesión</Link></li>
+          <li className='poppins-regular'>
+            <Link to="/login" onClick={() => setMenuOpen(false)}>Iniciar Sesión</Link>
+          </li>
         )}
       </ul>
     </nav>

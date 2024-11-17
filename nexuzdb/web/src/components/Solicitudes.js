@@ -44,20 +44,21 @@ const Solicitudes = () => {
   return (
     <main>
       <section className="s3">
-        <nav>
-          <div className="links">
+      <div className='admin'>
+            <div className="links">
             <ul className="poppins-regular btn">
-              <li><a href="/dashboard">USUARIOS</a></li>
-              <li><a href="/solicitudes">SOLICITUDES</a></li>
-              <li><a href="/crearUsuarios">CREAR USUARIO</a></li>
+                <li><a href="/dashboard">USUARIOS</a></li>
+                <li><a href="/solicitudes">SOLICITUDES</a></li>
+                <li><a href="/crearUsuarios">CREAR USUARIO</a></li>
             </ul>
-          </div>
-        </nav>
+            </div>  
+        </div>
         <div className="title3">
           <h1 className="poppins-regular">SOLICITUDES</h1>
         </div>
         <div className="cards">
           <div className="card-form">
+          <div className="table-wrapper">
             <table>
               <thead className="poppins-semibold">
                 <tr>
@@ -90,6 +91,7 @@ const Solicitudes = () => {
                 )}
               </tbody>
             </table>
+            </div>
           </div>
         </div>
       </section>

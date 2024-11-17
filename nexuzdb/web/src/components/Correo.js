@@ -34,15 +34,15 @@ const Correo = () => {
     <div>
       <main>
         <section className="s3">
-          <nav>
+        <div className='admin'>
             <div className="links">
-              <ul className="poppins-regular btn">
+            <ul className="poppins-regular btn">
                 <li><a href="/dashboard">USUARIOS</a></li>
                 <li><a href="/solicitudes">SOLICITUDES</a></li>
                 <li><a href="/crearUsuarios">CREAR USUARIO</a></li>
-              </ul>
-            </div>
-          </nav>
+            </ul>
+            </div>  
+        </div>
           <div className="title3">
             <h1 className="poppins-regular">NOTIFICAR</h1>
           </div>

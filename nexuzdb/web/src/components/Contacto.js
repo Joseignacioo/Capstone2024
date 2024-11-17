@@ -107,7 +107,7 @@ const CrearUsuario = () => {
                                     <input className="btn poppins-semibold" type="submit" value="Enviar" />
                                 </div>
                                 {error && <p className="error-message">{error}</p>} {/* Muestra el mensaje de error */}
-                                {successMessage && <p className="success-message">{successMessage}</p>} Muestra el mensaje de éxito
+                                {successMessage && <p className="success-message">{successMessage}</p>}
                             </form>
                         </div>
                     </div>

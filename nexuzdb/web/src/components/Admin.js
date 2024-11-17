@@ -23,39 +23,44 @@ const Admin = () => {
     <div>
       <main>
         <section className="s3">
-        <nav>
+        <div className='admin'>
             <div className="links">
             <ul className="poppins-regular btn">
                 <li><a href="/dashboard">USUARIOS</a></li>
                 <li><a href="/solicitudes">SOLICITUDES</a></li>
                 <li><a href="/crearUsuarios">CREAR USUARIO</a></li>
             </ul>
-            </div>
-        </nav>
+            </div>  
+        </div>
           <div className="title3">
             <h1 className="poppins-regular">USUARIOS</h1>
           </div>
           <div className="cards">
-            <div className="card-form">
+          <div className="card-form">
+            <div className="table-wrapper"> {/* Contenedor para habilitar el deslizamiento */}
               <table>
                 <thead className="poppins-semibold">
                   <tr>
+                    <th>ID</th>
                     <th>Correo</th>
                     <th>Nombre</th>
-                    <th>Notificar</th>
+                    <th>Rol</th>
                   </tr>
                 </thead>
                 <tbody className="poppins-regular">
                   {users.map(user => (
                     <tr key={user.usuario_id}>
+                      <td>{user.usuario_id}</td>
                       <td>{user.email}</td>
                       <td>{user.nombre_usuario}</td>
-                      <td><a href="/">Notificar</a></td>
+                      <td>{user.rol}</td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             </div>
+          </div>
+
           </div>
         </section>
       </main>

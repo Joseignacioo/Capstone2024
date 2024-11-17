@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../assets/image2.png';
+
 import logo2 from '../assets/image1.png';
 
 
@@ -15,8 +15,7 @@ const Nosotros = () => (
               Somos un equipo que busca ayudar a los procesos manuales de las bodegas actualmente, a traves de la automatizacion del historial de inventarios
             </p>
           </div>
-          <div>
-            <img src={logo} alt="Logo de NexuzDB" />
+          <div className='img'>
             <img src={logo2} alt="Logo de NexuzDB" />
           </div>
         </section>
