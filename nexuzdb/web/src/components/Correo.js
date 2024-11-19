@@ -1,86 +1,104 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { useLocation } from 'react-router-dom';
+import axios from 'axios';
 
 const Correo = () => {
   const [emailData, setEmailData] = useState({
     to: '',
-    subject: 'Notificación',
-    text: 'Este es un correo de notificación.',
+    subject: '',
+    text: '',
   });
   const [message, setMessage] = useState('');
-  const location = useLocation(); // Hook para obtener la ubicación
+  const location = useLocation();
 
   useEffect(() => {
-    // Obtener el correo de los parámetros de la URL
     const queryParams = new URLSearchParams(location.search);
     const email = queryParams.get('email');
     if (email) {
-      setEmailData((prevState) => ({ ...prevState, to: email }));
+      setEmailData((prev) => ({ ...prev, to: email }));
     }
   }, [location]);
 
   const sendEmail = async () => {
+    setMessage(''); // Limpiar mensajes previos
+    if (!emailData.to || !emailData.subject || !emailData.text) {
+      setMessage('Por favor, completa todos los campos.');
+      return;
+    }
+
     try {
-      const response = await axios.post('http://localhost:4000/api/email/send', emailData);
-      setMessage(response.data.message);
+      const response = await axios.post(
+        'https://tgbhqmmvo3.execute-api.us-east-2.amazonaws.com/dev/sendemail',
+        emailData,
+        { headers: { 'Content-Type': 'application/json' } }
+      );
+      setMessage(response.data.message); // Mostrar mensaje de éxito
     } catch (error) {
-      console.error('Error al enviar el correo:', error);
-      setMessage('Error al enviar el correo');
+      console.error('Error al enviar el correo:', error.response || error);
+      setMessage('Error al enviar el correo. Revisa los datos e intenta nuevamente.');
     }
   };
 
   return (
-    <div>
-      <main>
-        <section className="s3">
-        <div className='admin'>
-            <div className="links">
+    <main>
+      <section className="s3">
+        <div className="admin">
+          <div className="links">
             <ul className="poppins-regular btn">
-                <li><a href="/dashboard">USUARIOS</a></li>
-                <li><a href="/solicitudes">SOLICITUDES</a></li>
-                <li><a href="/crearUsuarios">CREAR USUARIO</a></li>
+              <li><a href="/dashboard">USUARIOS</a></li>
+              <li><a href="/solicitudes">SOLICITUDES</a></li>
+              <li><a href="/crearUsuarios">CREAR USUARIO</a></li>
             </ul>
-            </div>  
-        </div>
-          <div className="title3">
-            <h1 className="poppins-regular">NOTIFICAR</h1>
           </div>
-          <div className="cards">
-            <div className="card-form poppins-regular">
-              <div className="form poppins-regular">
-                <h1>Enviar Notificación por Correo</h1>
-                <input className='poppins-regular'
+        </div>
+        <div className="title3">
+          <h1 className="poppins-regular">NOTIFICAR</h1>
+        </div>
+        <div className="cards">
+          <div className="card-form poppins-regular">
+            <div className="form poppins-regular">
+              <h1>Enviar Notificación por Correo</h1>
+              <div className="form-input">
+                <label htmlFor="to">Correo destinatario:</label>
+                <input
                   type="email"
-                  placeholder="Correo destinatario"
+                  id="to"
+                  className="poppins-regular"
                   value={emailData.to}
                   onChange={(e) => setEmailData({ ...emailData, to: e.target.value })}
+                  readOnly
                 />
               </div>
-              <div className='form'>
-              <input className='poppins-regular'
+              <div className="form-input">
+                <label htmlFor="subject">Asunto:</label>
+                <input
                   type="text"
-                  placeholder="Asunto"
+                  id="subject"
+                  className="poppins-regular"
+                  placeholder="Escribe el asunto"
                   value={emailData.subject}
                   onChange={(e) => setEmailData({ ...emailData, subject: e.target.value })}
                 />
               </div>
-              <div className='form'>
-                <textarea className='poppins-regular'
+              <div className="form-input">
+                <label htmlFor="text">Mensaje:</label>
+                <textarea
+                  id="text"
+                  className="poppins-regular"
                   placeholder="Escribe tu mensaje"
                   value={emailData.text}
                   onChange={(e) => setEmailData({ ...emailData, text: e.target.value })}
                 />
               </div>
-              <div className='form' >
-                <button className='poppins-regular' onClick={sendEmail}>Enviar Correo</button>
-                {message && <p>{message}</p>}
+              <div className="form-input">
+                <button className="poppins-regular" onClick={sendEmail}>Enviar Correo</button>
+                {message && <p style={{ color: message.includes('Error') ? 'red' : 'green' }}>{message}</p>}
               </div>
             </div>
           </div>
-        </section>
-      </main>
-    </div>
+        </div>
+      </section>
+    </main>
   );
 };
 

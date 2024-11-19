@@ -18,9 +18,13 @@ const App = () => (
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/contacto" element={<Contacto />} />
-        <Route path="/nosotros" element={<Nosotros />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/Solicitudes" element={<Solicitudes />} />
+        <Route path="/CrearUsuario" element={<CrearUsuarios />} />
+        <Route path="/Correo" element={<Correo />} />
+        <Route path="/Admin" element={<Admin />} />
+        <Route path="/Contacto" element={<Contacto />} />
+        <Route path="/Nosotros" element={<Nosotros />} />
+        <Route path="/Login" element={<Login />} />
 
         {/* Rutas protegidas para admins */}
         <Route 

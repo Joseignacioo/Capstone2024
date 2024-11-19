@@ -19,7 +19,7 @@ const CrearUsuario = () => {
         };
 
         try {
-            const response = await fetch('http://127.0.0.1:4000/api/solicitudes/create', { // Cambia el puerto por el correcto
+            const response = await fetch('https://n4k38zqpv6.execute-api.us-east-2.amazonaws.com/dev/solicitudes', { // Nueva URL del API Gateway
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -33,7 +33,7 @@ const CrearUsuario = () => {
 
             const data = await response.json();
             console.log('Usuario creado:', data);
-            setSuccessMessage('Usuario creado con éxito'); // Mensaje de éxito
+            setSuccessMessage('Solicitud Realizada'); // Mensaje de éxito
             setError(null); // Limpia el error si fue exitoso
 
             // Reinicia los campos después de un envío exitoso

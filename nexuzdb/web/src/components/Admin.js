@@ -9,7 +9,7 @@ const Admin = () => {
     const fetchUsers = async () => {
       try {
         // Llama a la API para obtener todos los usuarios
-        const response = await axios.get('http://192.168.56.1:4000/api/user/users'); // Cambia a la URL de tu servidor
+        const response = await axios.get('https://wly5abxnyd.execute-api.us-east-2.amazonaws.com/dev/users'); // Nueva URL del API Gateway
         setUsers(response.data);
       } catch (error) {
         console.error('Error al obtener usuarios:', error);

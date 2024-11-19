@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 const CrearUsuario = () => {
   // Estado para almacenar los datos del nuevo usuario
   const [usuario, setUsuario] = useState({
-    usuario_id: '',
     nombre_usuario: '',
     email: '',
     contrasena: '',
@@ -26,7 +25,7 @@ const CrearUsuario = () => {
     setSuccess('');
 
     try {
-      const response = await fetch('http://127.0.0.1:4000/api/user/register', {
+      const response = await fetch('https://0bqi0nu3gk.execute-api.us-east-2.amazonaws.com/dev/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -41,7 +40,7 @@ const CrearUsuario = () => {
       }
 
       setSuccess('Usuario creado con éxito');
-      setUsuario({ usuario_id: '', nombre_usuario: '', email: '', contrasena: '', rol: '' }); // Limpiar formulario
+      setUsuario({ nombre_usuario: '', email: '', contrasena: '', rol: '' }); // Limpiar formulario
     } catch (err) {
       setError(err.message);
     }
@@ -50,14 +49,14 @@ const CrearUsuario = () => {
   return (
     <main>
       <section className="s3">
-      <div className='admin'>
-            <div className="links">
+        <div className='admin'>
+          <div className="links">
             <ul className="poppins-regular btn">
-                <li><a href="/dashboard">USUARIOS</a></li>
-                <li><a href="/solicitudes">SOLICITUDES</a></li>
-                <li><a href="/crearUsuarios">CREAR USUARIO</a></li>
+              <li><a href="/dashboard">USUARIOS</a></li>
+              <li><a href="/solicitudes">SOLICITUDES</a></li>
+              <li><a href="/crearUsuarios">CREAR USUARIO</a></li>
             </ul>
-            </div>  
+          </div>  
         </div>  
         <div className="title3">
           <h1 className="poppins-regular">CREAR USUARIO</h1>
@@ -66,26 +65,50 @@ const CrearUsuario = () => {
           <div className="card-form">
             <form onSubmit={handleSubmit} className='form'>
               <div className='form-input'>
-                <label htmlFor="usuario_id">ID de Usuario:</label>
-                <input type="text" id="usuario_id" name="usuario_id" value={usuario.usuario_id} onChange={handleChange} required />
-              </div>
-              <div className='form-input'>
                 <label htmlFor="nombre_usuario">Nombre de Usuario:</label>
-                <input type="text" id="nombre_usuario" name="nombre_usuario" value={usuario.nombre_usuario} onChange={handleChange} required />
+                <input 
+                  type="text" 
+                  id="nombre_usuario" 
+                  name="nombre_usuario" 
+                  value={usuario.nombre_usuario} 
+                  onChange={handleChange} 
+                  required 
+                />
               </div>
               <div className='form-input'>
                 <label htmlFor="email">Email:</label>
-                <input type="email" id="email" name="email" value={usuario.email} onChange={handleChange} required />
+                <input 
+                  type="email" 
+                  id="email" 
+                  name="email" 
+                  value={usuario.email} 
+                  onChange={handleChange} 
+                  required 
+                />
               </div>
               <div className='form-input'>
                 <label htmlFor="contrasena">Contraseña:</label>
-                <input type="password" id="contrasena" name="contrasena" value={usuario.contrasena} onChange={handleChange} required />
+                <input 
+                  type="password" 
+                  id="contrasena" 
+                  name="contrasena" 
+                  value={usuario.contrasena} 
+                  onChange={handleChange} 
+                  required 
+                />
               </div>
               <div className='form-input'>
                 <label htmlFor="rol">Rol:</label>
-                <input type="text" id="rol" name="rol" value={usuario.rol} onChange={handleChange} required />
+                <input 
+                  type="text" 
+                  id="rol" 
+                  name="rol" 
+                  value={usuario.rol} 
+                  onChange={handleChange} 
+                  required 
+                />
               </div>
-                <br></br>
+              <br />
               <button type="submit">Crear Usuario</button>
             </form>
             {error && <p style={{ color: 'red' }}>{error}</p>}
