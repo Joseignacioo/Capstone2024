@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Solicitudes = () => {
   const [solicitudes, setSolicitudes] = useState([]);
-  const navigate = useNavigate(); // Para navegar entre rutas
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchSolicitudes = async () => {
@@ -30,13 +30,13 @@ const Solicitudes = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ id }), // Enviar el ID en el cuerpo de la solicitud
+        body: JSON.stringify({ id }),
       });
-  
+
       if (!response.ok) {
         throw new Error('Error al eliminar la solicitud');
       }
-  
+
       setSolicitudes((prevSolicitudes) =>
         prevSolicitudes.filter((solicitud) => solicitud.id !== id)
       );
@@ -47,6 +47,11 @@ const Solicitudes = () => {
 
   const handleNotificar = (correo) => {
     navigate(`/enviarCorreo?email=${correo}`);
+  };
+
+  const handleCrearUsuario = (correo, nombre, apellido) => {
+    // Redirigir al formulario de creación de usuarios con los datos predefinidos en la URL
+    navigate(`/crearUsuarios?correo=${correo}&nombre=${nombre}&apellido=${apellido}`);
   };
 
   return (
@@ -73,6 +78,7 @@ const Solicitudes = () => {
                     <th>Correo</th>
                     <th>Nombre</th>
                     <th>Celular</th>
+                    <th>Crear Usuario</th>
                     <th>Notificar</th>
                     <th>Eliminar</th>
                   </tr>
@@ -85,6 +91,9 @@ const Solicitudes = () => {
                         <td>{`${solicitud.nombre} ${solicitud.apellido}`}</td>
                         <td>{solicitud.celular}</td>
                         <td>
+                          <button onClick={() => handleCrearUsuario(solicitud.correo, solicitud.nombre, solicitud.apellido)}>Crear Usuario</button>
+                        </td>
+                        <td>
                           <button onClick={() => handleNotificar(solicitud.correo)}>Notificar</button>
                         </td>
                         <td>
@@ -94,7 +103,7 @@ const Solicitudes = () => {
                     ))
                   ) : (
                     <tr>
-                      <td colSpan="5">No hay solicitudes disponibles</td>
+                      <td colSpan="6">No hay solicitudes disponibles</td>
                     </tr>
                   )}
                 </tbody>

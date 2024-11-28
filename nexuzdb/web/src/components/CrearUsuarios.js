@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 const CrearUsuario = () => {
   // Estado para almacenar los datos del nuevo usuario
@@ -6,11 +7,27 @@ const CrearUsuario = () => {
     nombre_usuario: '',
     email: '',
     contrasena: '',
-    rol: ''
+    rol: '',
   });
 
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+
+  // Hook para capturar los parámetros de la URL
+  const location = useLocation();
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const correo = params.get('correo') || ''; // Capturar el correo de la URL
+    const nombre = params.get('nombre') ? params.get('nombre').replace(/_/g, ' ') : ''; // Reemplazar "_" por espacio en el nombre
+
+    // Establecer los valores iniciales en el estado del formulario
+    setUsuario((prev) => ({
+      ...prev,
+      email: correo,
+      nombre_usuario: nombre,
+    }));
+  }, [location]);
 
   // Manejar cambios en el formulario
   const handleChange = (e) => {
