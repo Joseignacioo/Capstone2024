@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TextInput, Alert, StyleSheet, Text, TouchableOpacity, ImageBackground, KeyboardAvoidingView, Platform, ScrollView, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import { View, TextInput, Alert, StyleSheet, Text, TouchableOpacity, ImageBackground, KeyboardAvoidingView, Platform, ScrollView, TouchableWithoutFeedback, Keyboard, Linking } from 'react-native';
 import { useAuth } from '../../context/AuthContext';
 
 const backgroundImage = require('../../../assets/LOGO-NEXUZDB.jpeg'); // Asegúrate de que la ruta de la imagen de fondo sea correcta
@@ -73,9 +73,9 @@ const LoginScreen = ({ navigation }) => {
                 <Text style={styles.buttonText}>Iniciar Sesión</Text>
               </TouchableOpacity>
 
-              <TouchableOpacity onPress={() => navigation.navigate('Register')}>
-                <Text style={styles.registerText}>¿No tienes una cuenta? Regístrate</Text>
-              </TouchableOpacity>
+              <TouchableOpacity onPress={() => Linking.openURL('https://thenexuzdb.com')}>
+              <Text style={styles.registerText}>¿No tienes una cuenta? Contactanos</Text>
+              </TouchableOpacity> 
             </View>
           </ScrollView>
         </KeyboardAvoidingView>
