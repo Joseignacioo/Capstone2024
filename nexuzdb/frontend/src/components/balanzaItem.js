@@ -4,7 +4,7 @@ import { styles, stylesHome } from '../styles';
 
 const logo = require('../../assets/balanza.png');
 
-export default function BalanzaItem({ item }) {
+export default function balanzaItem({ item }) {
   return (
     <View style={stylesHome.card}>
       <View>
