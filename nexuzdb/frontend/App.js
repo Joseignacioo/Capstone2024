@@ -9,6 +9,11 @@ import CrearProductoScreen from './src/screens/producto/CrearProductoScreen';
 import CrearInventarioScreen from './src/screens/inventario/CrearInventarioScreen';
 import EditInventario from './src/screens/inventario/EditInventario';
 import { TouchableOpacity, Text } from 'react-native';
+import { LogBox } from 'react-native';
+
+LogBox.ignoreAllLogs(true);
+console.disableYellowBox = true;
+
 
 const Stack = createStackNavigator();
 
@@ -35,7 +40,11 @@ const AppNavigator = () => {
           <Stack.Screen name="Productos" component={ProductosScreen} />
           <Stack.Screen name="CrearProductos" component={CrearProductoScreen} />
           <Stack.Screen name="Vinculacion" component={CrearInventarioScreen} />
-          <Stack.Screen name='EditInventario' component={EditInventario}/>
+          <Stack.Screen 
+        name="EditInventario" 
+        component={EditInventario} 
+        options={{ title: 'Modificar' }} // Cambia el título de la barra superior
+      />
         </>
       ) : (
         <Stack.Screen name="Login" component={LoginScreen} />
