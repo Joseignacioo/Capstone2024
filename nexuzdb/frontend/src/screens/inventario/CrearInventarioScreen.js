@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, FlatList, Text, TextInput, Button, Alert, TouchableOpacity } from 'react-native';
 import axios from 'axios';
-import BalanzaItem from '../../components/BalanzaItem';
+import BalanzaItem from '../../components/balanzaItem';
 import { stylesHome } from '../../styles';
 import { useNavigation } from '@react-navigation/native';
 
@@ -51,9 +51,28 @@ export default function CrearInventarioScreen() {
     }
 };
 
-
   return (
     <View style={stylesHome.container}>
+      {/* Formulario para Crear Vinculación */}
+      <View>
+        <Text style={stylesHome.titulo}>Crear vinculación</Text>
+        <TextInput
+          style={stylesHome.input}
+          placeholder="ID del Producto"
+          value={productoId}
+          onChangeText={setProductoId}
+          keyboardType="numeric"
+        />
+        <TextInput
+          style={stylesHome.input}
+          placeholder="ID de la Balanza"
+          value={balanzaId}
+          onChangeText={setBalanzaId}
+          keyboardType="numeric"
+        />
+        <Button title="VINCULAR" onPress={CrearVinculacion} />
+      </View>
+
       {/* Sección de Productos Disponibles */}
       <View style={stylesHome.nav}>
         <Text style={stylesHome.productoCantidad}>Productos Disponibles</Text>
@@ -74,26 +93,6 @@ export default function CrearInventarioScreen() {
           keyExtractor={(item) => item.balanza_id.toString()}
           ListEmptyComponent={<Text>No hay balanzas disponibles</Text>}
         />
-      </View>
-
-      {/* Formulario para Crear Vinculación */}
-      <View>
-        <Text style={stylesHome.titulo}>Crear vinculación</Text>
-        <TextInput
-          style={stylesHome.input}
-          placeholder="ID del Producto"
-          value={productoId}
-          onChangeText={setProductoId}
-          keyboardType="numeric"
-        />
-        <TextInput
-          style={stylesHome.input}
-          placeholder="ID de la Balanza"
-          value={balanzaId}
-          onChangeText={setBalanzaId}
-          keyboardType="numeric"
-        />
-        <Button title="VINCULAR" onPress={CrearVinculacion} />
       </View>
     </View>
   );
