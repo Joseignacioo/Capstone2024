@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, FlatList, Text, TextInput, Button, Alert, TouchableOpacity } from 'react-native';
+import { View, FlatList, Text, TextInput, Button, Alert, TouchableOpacity, Image, StyleSheet } from 'react-native';
 import axios from 'axios';
 import BalanzaItem from '../../components/balanzaItem';
 import { stylesHome } from '../../styles';
@@ -8,12 +8,15 @@ import { useNavigation } from '@react-navigation/native';
 export default function CrearInventarioScreen() {
   const navigation = useNavigation(); 
   const [balanzas, setBalanzas] = useState([]);
+  const [productos, setProductos] = useState([]); // Estado para los productos
   const [productoId, setProductoId] = useState('');
   const [balanzaId, setBalanzaId] = useState('');
+  const [isLoading, setIsLoading] = useState(true); // Estado de carga para los productos
 
-  // Cargar balanzas disponibles al cargar la pantalla
+  // Cargar balanzas y productos disponibles al cargar la pantalla
   useEffect(() => {
     fetchBalanzas();
+    fetchProductos(); // Llamada para obtener los productos
   }, []);
 
   // Función para obtener la lista de balanzas
@@ -21,10 +24,22 @@ export default function CrearInventarioScreen() {
     try {
       const res = await fetch('https://kmj2ngd23h.execute-api.us-east-2.amazonaws.com/dev/obtener_balanzas');
       const data = await res.json();
-      //console.log("datos:", data);
       setBalanzas(data);
     } catch (error) {
       console.error("Error al obtener las balanzas:", error);
+    }
+  }
+
+  // Función para obtener la lista de productos
+  async function fetchProductos() {
+    try {
+      const res = await fetch('https://sasmrjjfbk.execute-api.us-east-2.amazonaws.com/dev/obtener_producto');
+      const data = await res.json();
+      setProductos(data);
+      setIsLoading(false); // Finaliza la carga de productos
+    } catch (error) {
+      console.error("Error al obtener los productos:", error);
+      setIsLoading(false); // Termina la carga aunque haya error, para evitar bloqueos
     }
   }
 
@@ -74,14 +89,42 @@ export default function CrearInventarioScreen() {
       </View>
 
       {/* Sección de Productos Disponibles */}
-      <View style={stylesHome.nav}>
-        <Text style={stylesHome.productoCantidad}>Productos Disponibles</Text>
-        <TouchableOpacity
-          style={stylesHome.button_productos}
-          onPress={() => navigation.navigate('Productos')}
-        >
-          <Text style={stylesHome.buttonText_productos}>+</Text>
-        </TouchableOpacity>
+      <View style={{ flex: 1, marginTop: 20 }}>
+        <View style={styles.productosHeader}>
+          <Text style={stylesHome.productoCantidad}>Productos Disponibles</Text>
+          <TouchableOpacity
+            style={stylesHome.button_productos}
+            onPress={() => navigation.navigate('Productos')}
+          >
+            <Text style={stylesHome.buttonText_productos}>+</Text>
+          </TouchableOpacity>
+        </View>
+
+        {/* Mostrar los productos solo cuando se hayan cargado */}
+        {!isLoading && productos.length > 0 ? (
+          <FlatList
+            data={productos}
+            renderItem={({ item }) => (
+              <View style={styles.productItem}>
+                <Image
+                  source={{ uri: `data:image/jpeg;base64,${item.imagen}` }}
+                  style={styles.productImage}
+                />
+                <View style={styles.productDetails}>
+                  <Text style={styles.productText}># {item.id}</Text>
+                  <Text style={styles.productText}>{item.nombre}</Text>
+                  <Text style={styles.productText}>Peso: {item.peso_unitario} kg</Text>
+                </View>
+              </View>
+            )}
+            keyExtractor={(item) => item.id.toString()}
+            horizontal={true}
+          />
+        ) : (
+          !isLoading && (
+            <Text style={styles.emptyText}>No hay productos disponibles</Text>
+          )
+        )}
       </View>
 
       {/* Lista de Balanzas Disponibles */}
@@ -97,3 +140,37 @@ export default function CrearInventarioScreen() {
     </View>
   );
 }
+
+// Estilos para los productos
+const styles = StyleSheet.create({
+  productosHeader: {
+    flexDirection: 'row', // Distribuye los elementos de izquierda a derecha
+    justifyContent: 'space-between', // Alinea el texto a la izquierda y el botón a la derecha
+    alignItems: 'center',
+  },
+  productItem: {
+    flexDirection: 'column', // Para que la imagen y los textos se acomoden verticalmente
+    marginRight: 5, // Espacio entre los elementos
+    padding: 10,
+    backgroundColor: '#f9f9f9',
+    borderRadius: 5,
+    alignItems: 'center',
+  },
+  productImage: {
+    width: 100,
+    height: 100,
+    marginBottom: 10, // Espacio entre la imagen y los textos
+  },
+  productDetails: {
+    flex: 1,
+  },
+  productText: {
+    fontSize: 17,
+  },
+  emptyText: {
+    fontSize: 16, // Tamanho visible para el texto
+    color: 'gray',
+    textAlign: 'center', // Centra el texto
+    marginTop: 20, // Separación de los otros elementos
+  },
+});
