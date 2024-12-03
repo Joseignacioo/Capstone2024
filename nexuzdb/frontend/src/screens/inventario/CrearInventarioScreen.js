@@ -4,6 +4,7 @@ import axios from 'axios';
 import BalanzaItem from '../../components/balanzaItem';
 import { stylesHome } from '../../styles';
 import { useNavigation } from '@react-navigation/native';
+import { useFocusEffect } from '@react-navigation/native';
 
 export default function CrearInventarioScreen() {
   const navigation = useNavigation(); 
@@ -12,12 +13,20 @@ export default function CrearInventarioScreen() {
   const [productoId, setProductoId] = useState('');
   const [balanzaId, setBalanzaId] = useState('');
   const [isLoading, setIsLoading] = useState(true); // Estado de carga para los productos
+  
 
   // Cargar balanzas y productos disponibles al cargar la pantalla
   useEffect(() => {
     fetchBalanzas();
     fetchProductos(); // Llamada para obtener los productos
   }, []);
+
+  // Recargar los productos cada vez que la pantalla recibe foco
+  useFocusEffect(
+    React.useCallback(() => {
+      fetchProductos();  // Recarga la lista de productos cada vez que la pantalla recibe foco
+    }, [])
+  );
 
   // Función para obtener la lista de balanzas
   async function fetchBalanzas() {
