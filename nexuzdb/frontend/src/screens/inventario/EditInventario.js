@@ -62,7 +62,6 @@ export default function EditInventario({ route, navigation }) {
 
   return (
     <View style={stylesHome.container}>
-      <Text style={stylesHome.titulo}>Balanza: {inventario.balanza_modelo}</Text>
       <Text style={stylesHome.titulo}>Producto Actual: {inventario.producto_nombre}</Text>
 
       {/* Campo para escribir un nuevo ID de Producto */}

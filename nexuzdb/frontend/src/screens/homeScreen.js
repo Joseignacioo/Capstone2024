@@ -54,27 +54,70 @@ export default function HomeScreen({ navigation }) {
                 style={stylesHome.image} 
             />
             <View>
-            <Text style={stylesHome.productoTitulo}>Producto:</Text>
-            <Text style={stylesHome.productoNombre}>{item.producto_nombre}</Text>
-
-            <View style={stylesHome.cantidadContainer}>
-                <Text style={stylesHome.cantidadIcon}>📦</Text>
-                <Text style={stylesHome.productoCantidad}>Cantidad: {item.cantidad} Unidades</Text>
-            </View>
-
-              
-                
-                {/* Botón para modificar, solo para inventarios */}
-                {item.inventario_id && (
-                    <TouchableOpacity 
-                        onPress={() => navigation.navigate('EditInventario', { inventario: item })}
-                    >
-                        <Text style={{ color: 'orange' }}>Modificar</Text>
-                    </TouchableOpacity>
+                {/* Mostrar el ID de la balanza */}
+                {item.balanza_id && (
+                    <Text style={stylesHome.balanzaNombre}>Balanza ID: {item.balanza_id}</Text>
                 )}
+                <Text style={stylesHome.productoTitulo}>Producto 📦</Text>
+                <Text style={stylesHome.productoNombre}>{item.producto_nombre}</Text>
+    
+                <View style={stylesHome.cantidadContainer}>
+                    <Text style={stylesHome.productoCantidad}>Cantidad: {item.cantidad} Unidades</Text>
+                </View>
+    
+    
+                {/* Contenedor de los botones */}
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                    {/* Botón para modificar, solo para inventarios */}
+                    {item.inventario_id && (
+                        <TouchableOpacity 
+                            onPress={() => navigation.navigate('EditInventario', { inventario: item })}
+                            style={{ marginRight: 10 }}  // Espacio entre los botones
+                        >
+                            <Text style={{ color: 'orange' }}>Modificar</Text>
+                        </TouchableOpacity>
+                    )}
+
+                    {/* Botón para eliminar el inventario completo */}
+                    {item.inventario_id && (
+                        <TouchableOpacity 
+                            onPress={() => eliminarInventario(item.inventario_id)}
+                        >
+                            <Text style={{ color: 'red' }}>Eliminar</Text>
+                        </TouchableOpacity>
+                    )}
+                </View>
             </View>
         </View>
     );
+    
+    async function eliminarInventario(inventarioId) {
+        try {
+            const res = await fetch('https://0pi9ygyds6.execute-api.us-east-2.amazonaws.com/dev/delete_inventario', {
+                method: 'DELETE',  // Usamos DELETE
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    inventarioId: inventarioId,  // Pasamos el ID del inventario a eliminar
+                })
+            });
+    
+            const data = await res.json();
+            if (res.ok) {
+                alert('Inventario eliminado');
+                fetchInventarios();  // Refrescar inventarios si es necesario
+            } else {
+                alert(`Error: ${data.error}`);
+            }
+        } catch (error) {
+            console.error('Error al eliminar inventario:', error);
+            alert('Error al eliminar el inventario');
+        }
+    }
+    
+    
+
 
     return (
         <View style={stylesHome.container}>
